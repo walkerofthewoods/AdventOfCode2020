@@ -1,5 +1,5 @@
-node_modules
+node_modules/
 prettier.config.js
 jest.config.js
-src/input.txt
-src/__tests__/index.spec.js
+input.txt
+index.spec.js
