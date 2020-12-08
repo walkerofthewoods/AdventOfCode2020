@@ -12,22 +12,32 @@ readFile('./src/input.txt')
 	});
 
 function seating() {
+	//replace nulls with ! so split works, then add one on end of document
 	for (i = 0; i < data.length; i++) {
 		if (data[i] == '') {
 			data[i] = '!';
 		}
-	} //replace nulls with !
+	}
+	data.push('!');
 
-	data = data.join(' ').split('!'); //combined data into array of single passport blocks
+	//data = data.join(' ').split('!'); //for part 1
 
 	let counter = 0;
 	let alphabet = 'abcdefghijklmnopqrstuvwxyz';
 	alphabet = alphabet.split('');
 
 	alphabet.forEach((e) => {
+		let prevMarker = -1;
 		for (i = 0; i < data.length; i++) {
-			if (data[i].includes(e)) {
-				counter++;
+			if (data[i] == '!') {
+				for (j = prevMarker + 1; j < i; j++) {
+					prevMarker = i;
+					if (!data[j].includes(e)) {
+						j = i - 1;
+					} else if (j == i - 1) {
+						counter++;
+					}
+				}
 			}
 		}
 	});
